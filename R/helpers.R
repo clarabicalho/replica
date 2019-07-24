@@ -1,3 +1,17 @@
+#' Wrap string by other strings
+#' @param vector A character vector. Elements to be wrapped.
+#' @param left A string. String pasted to the left of each element.
+#' @param right A string. String pasted to the right of each vector.
+#' @export
+#' @example
+#' se  <- round(runif(3), 3)
+#' wrap_str(se)
+wrap_str <- function(vector, left = "(", right = ")"){
+  sapply(vector, function(v)
+    ifelse(is.na(v) || v == "", "", paste0(left, v , right)))
+}
+
+
 #' Look for string pattern in files and print file name on consule
 #'
 #' @param pattern A string. What to lookup. A regex pattern or exact string (by setting \code{value = TRUE}, for example).

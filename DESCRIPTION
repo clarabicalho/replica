@@ -1,11 +1,12 @@
 Package: replica
 Type: Package
-Title: Helpers for Presenting and Publishing Results
+Title: Helpers for Formatting and Publishing Results
 Version: 0.1.0
-Authors@R: c(person("Clara", "Bicalho", email = "clara.bicalho@berkeley.edu", role = c("aut")))
+Authors@R: c(person("Clara", "Bicalho", email = "clara.bicalho@berkeley.edu", role = c("aut", "cre")))
 Maintainer: Clara Bicalho <clara.bicalho@berkeley.edu>
-Description:
-    TBD
+Description: Common functions and vignettes that help formatting R code and results for publishing or sharing. 
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1
+License: MIT + file LICENSE
+VignetteBuilder: knitr
