@@ -1,0 +1,64 @@
+---
+title: "Posting Replication Scripts Online"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{posting_replication_scripts_online}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+Replication scripts can be posted on a number of wesbites. Below are snippets that can be used to post on a Github repository or posted directly on the Wordpress platform.
+
+# Wordpress site
+
+Below we use the `RWordPress` package developed by Duncan Temple Lang ([here](https://github.com/duncantl/RWordPress)). It allows users to send an already compiled .html file to a Wordpress website as a blog post by entering your credentials and blog post-related fields.
+
+```{r setup, message=FALSE, warning=FALSE, eval = FALSE}
+if (!require('RWordPress')) {
+  # RWordPress and XMLRPC need to be installed from Github
+  devtools::install_github(c("duncantl/XMLRPC", "duncantl/RWordPress"))
+}
+library(knitr)
+library(RWordPress)
+library(readr)
+```
+
+```{r, eval = FALSE}
+
+# File (include full path if the file is not contained in current directory)
+html.file =  "20190717_Replication.html"
+text = paste(read_lines(html.file, skip = 18), collapse = "\n")
+
+# Set config options (fill in 'username' and 'password' fields)
+options(WordpressLogin = c(username = 'password'),
+        WordpressURL = 'http://www.mywebsite.nyc/xmlrpc.php')
+
+# Post content/html code goes in 'description'
+# Set 'title' to blog post (in this case paper) title
+# Set 'publish = FALSE' to create draft post, 'TRUE' to publish post directly
+newPost(
+  list(description = text, 
+       categories = c("Replication"),
+       title = "Replication: Humphreys, Sanchez de la Sierra, van der Windt (2019)"
+       ), 
+  publish = FALSE)
+
+```
+
+See `?RWordPress` for further documentation on `RWordPress` package functions.
+
+# Github repository
+
+Compiled `.md` files will display nicely once they are uploaded to Github. This can be done by editing the output field in the .Rmd YAML:
+
+```{r, eval = FALSE}
+output: rmarkdown::github_document
+```
+
+or, alternatively, setting `keep_md = TRUE`.
+
+```{r, eval = FALSE}
+output: 
+  html_document:
+    keep_md: true
+```
